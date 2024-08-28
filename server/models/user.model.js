@@ -22,8 +22,8 @@ const userSchema = mongoose.Schema(
     },
     // A flag indicating if the user is verified (default: false) The user will receive a verification token via email when they sign up for the first time, for verification purposes.
     isVerified: {
-      default: false,
       type: Boolean,
+      default: false,
     },
     // The date and time of the user's last login (default: current date)
     lastLogin: {

@@ -4,6 +4,7 @@ import express from "express";
 import "dotenv/config";
 // Import the Mongoose library to interact with MongoDB
 import mongoose from "mongoose";
+import userRoute from "./routes/user.route.js";
 
 // Set the port from the environment variable or default to 8000 if not provided
 const PORT = process.env.PORT || 8000;
@@ -11,6 +12,13 @@ const MONGO = process.env.MONGO;
 
 // Create an instance of an Express application
 const app = express();
+
+// Use Express middleware to parse JSON bodies from incoming requests
+app.use(express.json());
+// Use Express middleware to parse URL-encoded bodies (from HTML forms)
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/auth", userRoute);
 
 // Connect to the MongoDB database using Mongoose
 mongoose
