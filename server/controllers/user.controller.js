@@ -3,6 +3,7 @@ import Users from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 // Import utility function to generate a JWT token and send it in a cookie
 import generateTokenAndSendCookie from "../utils/generateTokenAndSendCookie.js";
+import { verificationEmail } from "../mails/emails.js";
 
 // @route /api/auth/signup
 // @desc Handle user registration
@@ -39,7 +40,8 @@ export const signup = async (req, res) => {
     });
     // Generate a JWT token, send it in a cookie, and authenticate the user
     generateTokenAndSendCookie(res, newUser._id);
-    // sendEmail code
+    // send verification code via email
+    await verificationEmail(newUser.email, newUser.verificationToken);
     // Send a success response to the client with the newly created user (excluding the password)
     res.status(200).json({
       success: true,
