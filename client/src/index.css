@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section {
+  @apply border-white max-w-[969px] mx-auto;
+}
+
+.hoverClass {
+  @apply transition duration-200 ease-linear;
+}
