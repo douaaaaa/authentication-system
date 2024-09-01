@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Home() {
   return (
     <section className=" section">
-      <div className=" flex flex-col items-center justify-center my-[51px]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className=" flex flex-col items-center justify-center my-[51px]"
+      >
         <h1 className=" font-bold text-[32px]">
           Secure <span className=" text-blue-1">Authentication</span> for Users
         </h1>
@@ -18,7 +24,7 @@ function Home() {
             Get started
           </button>
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 }

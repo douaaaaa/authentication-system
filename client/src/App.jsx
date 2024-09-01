@@ -2,6 +2,9 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
+import Verify from "./pages/Verify";
+import Login from "./pages/Login";
+import Reset from "./pages/Reset";
 
 function App() {
   return (
@@ -11,6 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/verify-email" element={<Verify />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<Reset />} />
         </Routes>
       </div>
     </BrowserRouter>
