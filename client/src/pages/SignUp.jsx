@@ -14,12 +14,14 @@ function SignUp() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const { isLoading, signup, error } = useAuthStore();
-  const navigate = useNavigate();
+  const navigate = useNavigate("");
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await signup(Name, Email, Password);
-      navigate("/verify-email");
+      const response = await signup(Name, Email, Password);
+      if (response && response.status === 200 && response.data.success) {
+        navigate("/verify-email");
+      }
     } catch (err) {
       console.log(err);
     }

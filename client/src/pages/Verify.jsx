@@ -3,14 +3,21 @@ import { motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
-import VerificationCode from "../components/VerificationCode";
 
 function Verify() {
-  const [Code, setCode] = useState(["", "", "", "", "", ""]);
-  const { isLoading, error } = useAuthStore();
+  const [Code, setCode] = useState("");
+  const { isLoading, error, verify } = useAuthStore();
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const response = await verify(Code);
+      if (response && response.status === 200 && response.data.success) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <section className="section flex items-center justify-center h-[80vh]">
@@ -26,10 +33,18 @@ function Verify() {
             Enter the 6 digits code sent to your email address.
           </p>
           <form className=" px-[28px]" onSubmit={submitHandler}>
-            <VerificationCode />
-            <p className=" text-red-500 text-[10px] text-left mb-[10px] capitalize">
-              {error}
-            </p>
+            {/* <VerificationCode /> */}
+            <input
+              onChange={(e) => setCode(e.target.value)}
+              value={Code}
+              maxLength={6}
+              className=" mb-[20px] bg-input-field outline-none w-[80px]  py-[6px] text-center text-sml rounded-md focus:border-blue-1 focus:shadow-bluexSm"
+            />
+            {error && (
+              <p className=" text-red-500 text-[10px] text-left mb-[10px] capitalize">
+                {error}
+              </p>
+            )}
             <button className=" bg-blue-2 text-[10px] w-full py-[7px] rounded-md font-bold hoverClass hover:bg-blue-1">
               {isLoading ? (
                 <AiOutlineLoading className=" mx-auto animate-spin" />

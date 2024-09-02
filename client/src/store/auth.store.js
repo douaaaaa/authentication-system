@@ -26,10 +26,27 @@ export const useAuthStore = create((set) => ({
         user: response.data.user,
         isAuthenticated: true,
       });
+      return response;
     } catch (error) {
       set({
         isLoading: false,
         error: error.response.data.message || "error signing up",
+      });
+    }
+  },
+  verify: async (code) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/verify-email",
+        { code }
+      );
+      set({ isLoading: false, user: response.data.user });
+      return response;
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response.data.message || "error verifying email",
       });
     }
   },

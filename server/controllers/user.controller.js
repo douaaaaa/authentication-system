@@ -3,7 +3,7 @@ import Users from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 // Import utility function to generate a JWT token and send it in a cookie
 import generateTokenAndSendCookie from "../utils/generateTokenAndSendCookie.js";
-import { verificationEmail } from "../mails/emails.js";
+import { sendWelcomeEmail, verificationEmail } from "../mails/emails.js";
 
 // @route /api/auth/signup
 // @desc Handle user registration
@@ -54,5 +54,43 @@ export const signup = async (req, res) => {
   } catch (error) {
     // Send an error response if something goes wrong
     res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+export const verifyEmail = async (req, res) => {
+  const { code } = req.body;
+  try {
+    if (!code) {
+      return res
+        .status(400)
+        .json({ success: false, message: "the verification code is required" });
+    }
+    const user = await Users.findOne({
+      verificationToken: code,
+      verificationTokenExpiresAt: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, error: "expired or invalide token" });
+    }
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    await user.save();
+    await sendWelcomeEmail(user.name, user.email);
+    res.status(200).json({
+      success: true,
+      message: "your email successfully verified",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: "server error: error verifying the email",
+    });
   }
 };
