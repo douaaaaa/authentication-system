@@ -13,7 +13,7 @@ function Verify() {
     try {
       const response = await verify(Code);
       if (response && response.status === 200 && response.data.success) {
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

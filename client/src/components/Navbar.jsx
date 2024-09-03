@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/auth.store";
 
 function Navbar() {
+  const { user, isAuthenticated } = useAuthStore();
   return (
     <nav className=" section flex items-center justify-between text-sml">
       <Link to={"/"}>
@@ -26,20 +28,24 @@ function Navbar() {
           <Link to={"/"}>Support</Link>
         </li>
       </ul>
-      <div className=" flex gap-[14px] items-center">
-        <Link to={"/login"}>
-          <button className=" w-[88px] h-[32px] rounded-md bg-gradient-to-r from-blue-1 to-blue-3 font-semibold p-[2px] shadow-none hoverClass hover:shadow-blue">
-            <div className=" bg-blue-5 w-full h-full rounded-md flex items-center justify-center ">
-              Login
-            </div>
-          </button>
-        </Link>
-        <Link to={"/signup"}>
-          <button className=" w-[88px] h-[32px] rounded-md bg-blue-2 font-semibold shadow-none hoverClass hover:shadow-blue hover:bg-blue-1">
-            Sign up
-          </button>
-        </Link>
-      </div>
+      {isAuthenticated && user.isVerified ? (
+        <div>{user.name}</div>
+      ) : (
+        <div className=" flex gap-[14px] items-center">
+          <Link to={"/login"}>
+            <button className=" w-[88px] h-[32px] rounded-md bg-gradient-to-r from-blue-1 to-blue-3 font-semibold p-[2px] shadow-none hoverClass hover:shadow-blue">
+              <div className=" bg-blue-5 w-full h-full rounded-md flex items-center justify-center ">
+                Login
+              </div>
+            </button>
+          </Link>
+          <Link to={"/signup"}>
+            <button className=" w-[88px] h-[32px] rounded-md bg-blue-2 font-semibold shadow-none hoverClass hover:shadow-blue hover:bg-blue-1">
+              Sign up
+            </button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
