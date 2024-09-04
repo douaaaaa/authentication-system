@@ -94,3 +94,17 @@ export const verifyEmail = async (req, res) => {
     });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    res
+      .status(200)
+      .json({ success: true, message: "the user successfully logout" });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "server error: error logging out",
+    });
+  }
+};

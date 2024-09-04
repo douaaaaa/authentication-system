@@ -1,9 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/auth.store";
 
 function Navbar() {
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated, logout } = useAuthStore();
+  const navigate = useNavigate();
+  const clickHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await logout();
+      if (response && response.status === 200 && response.data.success) {
+        return navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <nav className=" section flex items-center justify-between text-sml">
       <Link to={"/"}>
@@ -29,7 +41,15 @@ function Navbar() {
         </li>
       </ul>
       {isAuthenticated && user.isVerified ? (
-        <div>{user.name}</div>
+        <div className=" flex items-center gap-4">
+          <p className=" capitalize">{user.name}</p>
+          <button
+            onClick={(e) => clickHandler(e)}
+            className=" w-[88px] h-[32px] rounded-md bg-blue-2 font-semibold shadow-none hoverClass hover:shadow-blue hover:bg-blue-1"
+          >
+            Logout
+          </button>
+        </div>
       ) : (
         <div className=" flex gap-[14px] items-center">
           <Link to={"/login"}>

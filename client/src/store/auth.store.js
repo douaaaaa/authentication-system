@@ -50,4 +50,20 @@ export const useAuthStore = create((set) => ({
       });
     }
   },
+  logout: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/logout",
+        {}
+      );
+      set({ isLoading: false, isAuthenticated: false });
+      return response;
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error || "error in logout",
+      });
+    }
+  },
 }));
