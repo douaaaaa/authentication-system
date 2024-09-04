@@ -108,3 +108,35 @@ export const logout = async (req, res) => {
     });
   }
 };
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Wrong credentials" });
+    }
+    const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Wrong credentials" });
+    }
+    generateTokenAndSendCookie(res, user._id);
+    res.status(200).json({
+      success: true,
+      message: "user login successfully",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "server error: error sign in",
+    });
+  }
+};

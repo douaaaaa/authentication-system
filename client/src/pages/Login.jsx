@@ -10,10 +10,18 @@ import { motion } from "framer-motion";
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const { isLoading, error } = useAuthStore();
+  const { isLoading, error, login } = useAuthStore();
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const response = await login(Email, Password);
+      if (response && response.status === 200 && response.data.success) {
+        return navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <section className="section flex items-center justify-center h-[80vh]">
