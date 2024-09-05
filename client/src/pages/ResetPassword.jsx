@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 import Input from "../components/Input";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -10,7 +10,7 @@ function ResetPassword() {
   const { token } = useParams();
   const [Password, setPassword] = useState("");
   const [isPassword, setisPassword] = useState("");
-  const { isLoading, error, setNewPassword } = useAuthStore();
+  const { isLoading, error, setNewPassword, clearError } = useAuthStore();
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -24,6 +24,9 @@ function ResetPassword() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className="section flex items-center justify-center h-[80vh]">
       <motion.div

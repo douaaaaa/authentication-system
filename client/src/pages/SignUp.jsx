@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../components/Input";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import StrengthTracker from "../components/StrengthTracker";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/auth.store.js";
 import { AiOutlineLoading } from "react-icons/ai";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ function SignUp() {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const { isLoading, signup, error } = useAuthStore();
+  const { isLoading, signup, error, clearError } = useAuthStore();
   const navigate = useNavigate("");
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,6 +26,9 @@ function SignUp() {
       console.log(err);
     }
   };
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className="section flex items-center justify-center h-[80vh]">
       <motion.div

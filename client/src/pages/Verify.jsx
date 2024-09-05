@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 
 function Verify() {
   const [Code, setCode] = useState("");
-  const { isLoading, error, verify } = useAuthStore();
+  const { isLoading, error, verify, clearError } = useAuthStore();
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -19,6 +19,9 @@ function Verify() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className="section flex items-center justify-center h-[80vh]">
       <motion.div

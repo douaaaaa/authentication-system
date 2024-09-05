@@ -1,8 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAuthStore } from "../store/auth.store";
 
 function Home() {
+  const { clearError } = useAuthStore();
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className=" section">
       <motion.div

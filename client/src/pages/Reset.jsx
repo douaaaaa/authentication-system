@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 import Input from "../components/Input";
 import { MdOutlineMailOutline } from "react-icons/md";
 
 function Reset() {
   const [Email, setEmail] = useState("");
-  const { isLoading, error, resetPassword } = useAuthStore();
+  const { isLoading, error, resetPassword, clearError } = useAuthStore();
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -20,6 +20,9 @@ function Reset() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className="section flex items-center justify-center h-[80vh]">
       <motion.div

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { useAuthStore } from "../store/auth.store";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const { isLoading, error, login } = useAuthStore();
+  const { isLoading, error, login, clearError } = useAuthStore();
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,6 +23,9 @@ function Login() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    clearError();
+  }, [useLocation().pathname]);
   return (
     <section className="section flex items-center justify-center h-[80vh]">
       <motion.div
