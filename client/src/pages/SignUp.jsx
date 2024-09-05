@@ -62,7 +62,10 @@ function SignUp() {
               {error}
             </p>
             <StrengthTracker />
-            <button className=" bg-blue-2 text-[10px] w-full py-[7px] rounded-md font-bold hoverClass hover:bg-blue-1">
+            <button
+              disabled={isLoading}
+              className=" bg-blue-2 text-[10px] w-full py-[7px] rounded-md font-bold hoverClass hover:bg-blue-1 disabled:bg-blue-3"
+            >
               {isLoading ? (
                 <AiOutlineLoading className=" mx-auto animate-spin" />
               ) : (

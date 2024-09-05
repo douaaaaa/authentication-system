@@ -3,7 +3,12 @@ import Users from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 // Import utility function to generate a JWT token and send it in a cookie
 import generateTokenAndSendCookie from "../utils/generateTokenAndSendCookie.js";
-import { sendWelcomeEmail, verificationEmail } from "../mails/emails.js";
+import {
+  sendResetPasswordEmail,
+  sendWelcomeEmail,
+  verificationEmail,
+} from "../mails/emails.js";
+import crypto from "crypto";
 
 // @route /api/auth/signup
 // @desc Handle user registration
@@ -137,6 +142,34 @@ export const login = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "server error: error sign in",
+    });
+  }
+};
+
+export const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "user not found" });
+    }
+    const resetToken = await crypto.randomBytes(20).toString("hex");
+    const resetTokenExpiresAt = Date.now() + 60 * 60 * 1000;
+    user.resetToken = resetToken;
+    user.resetTokenExpiresAt = resetTokenExpiresAt;
+    await user.save();
+    await sendResetPasswordEmail(email, resetToken);
+    res.status(200).json({
+      success: true,
+      message: "the reset email is send successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "server error: Resetting Password process went wrong",
     });
   }
 };

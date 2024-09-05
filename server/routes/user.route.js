@@ -2,6 +2,7 @@
 import { Router } from "express";
 // Import the signup controller function to handle user registration
 import {
+  forgetPassword,
   login,
   logout,
   signup,
@@ -16,5 +17,6 @@ userRoute.post("/signup", signup);
 userRoute.post("/verify-email", verifyEmail);
 userRoute.post("/logout", logout);
 userRoute.post("/login", login);
+userRoute.post("/reset-password", forgetPassword);
 
 export default userRoute;

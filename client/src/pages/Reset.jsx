@@ -8,10 +8,17 @@ import { MdOutlineMailOutline } from "react-icons/md";
 
 function Reset() {
   const [Email, setEmail] = useState("");
-  const { isLoading, error } = useAuthStore();
-  const navigate = useNavigate();
+  const { isLoading, error, resetPassword } = useAuthStore();
   const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const response = await resetPassword(Email);
+      if (response && response.status === 200 && response.data.success) {
+        console.log("email send successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <section className="section flex items-center justify-center h-[80vh]">
