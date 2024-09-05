@@ -157,8 +157,8 @@ export const forgetPassword = async (req, res) => {
     }
     const resetToken = await crypto.randomBytes(20).toString("hex");
     const resetTokenExpiresAt = Date.now() + 60 * 60 * 1000;
-    user.resetToken = resetToken;
-    user.resetTokenExpiresAt = resetTokenExpiresAt;
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpiresAt = resetTokenExpiresAt;
     await user.save();
     await sendResetPasswordEmail(email, resetToken);
     res.status(200).json({
@@ -170,6 +170,35 @@ export const forgetPassword = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "server error: Resetting Password process went wrong",
+    });
+  }
+};
+
+export const setNewPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+  try {
+    const user = await Users.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiresAt: { $gt: Date.now() },
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "expired or invalid token" });
+    }
+    const hashedPassword = await bcryptjs.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiresAt = undefined;
+    await user.save();
+    res
+      .status(200)
+      .json({ success: true, message: "the password reset successfully" });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "server error: resetting Password went wrong",
     });
   }
 };

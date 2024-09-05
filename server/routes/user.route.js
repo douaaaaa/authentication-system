@@ -5,6 +5,7 @@ import {
   forgetPassword,
   login,
   logout,
+  setNewPassword,
   signup,
   verifyEmail,
 } from "../controllers/user.controller.js";
@@ -18,5 +19,6 @@ userRoute.post("/verify-email", verifyEmail);
 userRoute.post("/logout", logout);
 userRoute.post("/login", login);
 userRoute.post("/reset-password", forgetPassword);
+userRoute.post("/reset-password/:token", setNewPassword);
 
 export default userRoute;

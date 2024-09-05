@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Reset from "./pages/Reset";
 import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/auth.store.js";
+import ResetPassword from "./pages/ResetPassword";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -66,6 +67,7 @@ function App() {
             }
           />
           <Route path="/reset-password" element={<Reset />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route
             path="/dashboard"
             element={

@@ -35,7 +35,7 @@ const userSchema = mongoose.Schema(
     // Expiration date for the verification token
     verificationTokenExpiresAt: Date,
     // Token used for resetting the user's password
-    resetPassword: String,
+    resetPasswordToken: String,
     // Expiration date for the reset password token
     resetPasswordExpiresAt: Date,
   },

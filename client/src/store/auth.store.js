@@ -101,4 +101,19 @@ export const useAuthStore = create((set) => ({
       });
     }
   },
+  setNewPassword: async (token, password) => {
+    set({ isLoading: true, error: null });
+    try {
+      await axios.post(
+        `http://localhost:8000/api/auth/reset-password/${token}`,
+        { password }
+      );
+      set({ isLoading: false });
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response.data.message || "Set New Password error",
+      });
+    }
+  },
 }));
