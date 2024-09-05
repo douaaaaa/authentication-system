@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .section {
-  @apply border-white max-w-[969px] mx-auto;
+  @apply border-white max-w-[969px] mx-auto relative z-20;
 }
 
 .hoverClass {

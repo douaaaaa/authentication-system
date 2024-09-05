@@ -8,6 +8,7 @@ import Reset from "./pages/Reset";
 import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/auth.store.js";
 import ResetPassword from "./pages/ResetPassword";
+import FloatingItem from "./components/FloatingItem";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -19,7 +20,6 @@ const ProtectedRoute = ({ children }) => {
   }
   return children;
 };
-
 const RedirectAuthenticateUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
   if (isAuthenticated && user.isVerified) {
@@ -27,11 +27,12 @@ const RedirectAuthenticateUser = ({ children }) => {
   }
   return children;
 };
-
 function App() {
   return (
     <BrowserRouter>
-      <div className=" h-screen pt-10 sm:pt-16 px-10 bg-blue-5 sm:px-28 text-txt-clr font-poppins">
+      <div className=" relative h-screen pt-10 sm:pt-16 px-10 bg-blue-5 sm:px-28 text-txt-clr font-poppins">
+        <FloatingItem />
+
         <Navbar />
         <Routes>
           <Route

@@ -17,7 +17,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className=" section flex items-center justify-between text-sml">
+    <nav className=" relative z-20 section flex items-center justify-between text-sml">
       <Link to={"/"}>
         <h1 className=" text-[16px] font-bold">
           Secure<span className=" text-blue-1">Auth</span>
