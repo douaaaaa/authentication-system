@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
+import Homepage from "../Images/Homepage.png";
+import Card from "../components/Card";
 
 function Home() {
   const { clearError } = useAuthStore();
@@ -30,6 +32,56 @@ function Home() {
           </button>
         </Link>
       </motion.div>
+      <div className="  border-white relative flex items-center justify-center overflow-hidden">
+        <motion.img
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          src={Homepage}
+          width={400}
+          className=" relative z-10"
+        />
+        <Card
+          bottom="50px"
+          left="15px"
+          width="206px"
+          height="280px"
+          rotate="8deg"
+          z-index="40"
+        />
+        <Card
+          bottom="50px"
+          right="15px"
+          width="206px"
+          height="280px"
+          rotate="-8deg"
+          z-index="40"
+        />
+        <Card
+          bottom="-150px"
+          right="230px"
+          width="206px"
+          height="290px"
+          rotate="-8deg"
+          z-index="40"
+        />
+        <Card
+          top="70px"
+          right="260px"
+          width="200px"
+          height="200px"
+          rotate="8deg"
+          z-index="0"
+        />{" "}
+        <Card
+          top="200px"
+          left="250px"
+          width="150px"
+          height="150px"
+          rotate="-8deg"
+          z-index="0"
+        />
+      </div>
     </section>
   );
 }

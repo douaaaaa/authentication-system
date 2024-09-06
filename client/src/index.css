@@ -9,3 +9,11 @@
 .hoverClass {
   @apply transition duration-200 ease-linear;
 }
+
+.cards {
+  @apply bg-gradient-to-b from-white to-card-white rounded-[27px] p-[1px] overflow-hidden;
+}
+
+.innerCard {
+  @apply rounded-[27px] bg-card-white;
+}

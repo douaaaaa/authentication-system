@@ -7,7 +7,7 @@ function Dashboard() {
   useEffect(() => {
     clearError();
   }, [useLocation().pathname]);
-  return <div>Dashboard</div>;
+  return <div className=" section">Dashboard</div>;
 }
 
 export default Dashboard;
