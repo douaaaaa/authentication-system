@@ -32,7 +32,7 @@ function Home() {
           </button>
         </Link>
       </motion.div>
-      <div className="  border-white relative flex items-center justify-center overflow-hidden">
+      <div className="  border-white bg-[#] relative flex items-center justify-center overflow-hidden">
         <motion.img
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -48,6 +48,7 @@ function Home() {
           height="280px"
           rotate="8deg"
           z-index="40"
+          delay={1.2}
         />
         <Card
           bottom="50px"
@@ -56,6 +57,7 @@ function Home() {
           height="280px"
           rotate="-8deg"
           z-index="40"
+          delay={1.4}
         />
         <Card
           bottom="-150px"
@@ -64,6 +66,7 @@ function Home() {
           height="290px"
           rotate="-8deg"
           z-index="40"
+          delay={1.6}
         />
         <Card
           top="70px"
@@ -72,6 +75,7 @@ function Home() {
           height="200px"
           rotate="8deg"
           z-index="0"
+          delay={1.8}
         />{" "}
         <Card
           top="200px"
@@ -80,6 +84,7 @@ function Home() {
           height="150px"
           rotate="-8deg"
           z-index="0"
+          delay={2}
         />
       </div>
     </section>

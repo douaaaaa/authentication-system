@@ -17,7 +17,8 @@ module.exports = {
         "light-white": "rgba(255,255,255,0.50)",
         "input-field": "#0E1954",
         "bg-footer": "#050B31",
-        "card-white": "#424E8C",
+        "card-white": "#424e8cab",
+        // "card-white": "#ffffffc1",
       },
       fontSize: {
         sml: "12px",
