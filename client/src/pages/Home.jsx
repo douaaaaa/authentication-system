@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useAuthStore } from "../store/auth.store";
 import Homepage from "../Images/Homepage.png";
 import Card from "../components/Card";
+import CardOne from "../components/Cards/CardOne";
+import CardTwo from "../components/Cards/CardTwo";
+import CardThree from "../components/Cards/CardThree";
+import CardFour from "../components/Cards/CardFour";
+import Thorus from "../Images/Thorus 2.png";
+import Pyramid from "../Images/Pyramid 2.png";
 
 function Home() {
   const { clearError } = useAuthStore();
@@ -45,10 +51,11 @@ function Home() {
           bottom="50px"
           left="15px"
           width="206px"
-          height="280px"
+          height="300px"
           rotate="8deg"
           z-index="40"
           delay={1.2}
+          children={<CardOne />}
         />
         <Card
           bottom="50px"
@@ -58,6 +65,7 @@ function Home() {
           rotate="-8deg"
           z-index="40"
           delay={1.4}
+          children={<CardThree />}
         />
         <Card
           bottom="-150px"
@@ -67,6 +75,7 @@ function Home() {
           rotate="-8deg"
           z-index="40"
           delay={1.6}
+          children={<CardFour />}
         />
         <Card
           top="70px"
@@ -76,15 +85,30 @@ function Home() {
           rotate="8deg"
           z-index="0"
           delay={1.8}
+          children={<CardTwo />}
         />{" "}
         <Card
           top="200px"
-          left="250px"
+          left="260px"
           width="150px"
           height="150px"
           rotate="-8deg"
           z-index="0"
           delay={2}
+        />
+        <motion.img
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.2 }}
+          className=" absolute top-2 left-48 size-32 blur-sm"
+          src={Thorus}
+        />
+        <motion.img
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 2.4 }}
+          className=" absolute top-0 right-28 size-36"
+          src={Pyramid}
         />
       </div>
     </section>

@@ -31,8 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className=" relative h-screen pt-10 sm:pt-16 px-10 bg-blue-5 sm:px-28 text-txt-clr font-poppins overflow-hidden">
-        <FloatingItem />
-
+        {/* <FloatingItem /> */}
         <Navbar />
         <Routes>
           <Route

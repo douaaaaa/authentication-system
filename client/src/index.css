@@ -15,5 +15,5 @@
 }
 
 .innerCard {
-  @apply rounded-[27px] bg-card-white;
+  @apply rounded-[27px] bg-card-white p-5;
 }
