@@ -17,14 +17,14 @@ function Home() {
     clearError();
   }, [useLocation().pathname]);
   return (
-    <section className=" section">
+    <section className=" section h-full flex flex-col items-center justify-center ">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className=" flex flex-col items-center justify-center my-[51px]"
+        className=" flex flex-col items-center justify-center sm:my-auto"
       >
-        <h1 className=" font-bold text-[32px]">
+        <h1 className=" text-center font-bold text-[32px]">
           Secure <span className=" text-blue-1">Authentication</span> for Users
         </h1>
         <p className=" text-light-white text-sml text-center max-w-[680px] mb-[22px] mt-[13px]">
@@ -38,14 +38,14 @@ function Home() {
           </button>
         </Link>
       </motion.div>
-      <div className="  border-white bg-[#] relative flex items-center justify-center overflow-hidden">
+      <div className=" landingPage mt-auto w-full  bg-[#] relative items-center justify-center md:overflow-hidden">
         <motion.img
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
           src={Homepage}
           width={400}
-          className=" relative z-10"
+          className=" relative z-10 "
         />
         <Card
           bottom="50px"
@@ -53,7 +53,7 @@ function Home() {
           width="206px"
           height="300px"
           rotate="8deg"
-          z-index="40"
+          zIndex="40"
           delay={1.2}
           children={<CardOne />}
         />
@@ -63,7 +63,7 @@ function Home() {
           width="206px"
           height="280px"
           rotate="-8deg"
-          z-index="40"
+          zIndex="40"
           delay={1.4}
           children={<CardThree />}
         />
@@ -73,7 +73,7 @@ function Home() {
           width="206px"
           height="290px"
           rotate="-8deg"
-          z-index="40"
+          zIndex="40"
           delay={1.6}
           children={<CardFour />}
         />
@@ -83,7 +83,7 @@ function Home() {
           width="200px"
           height="200px"
           rotate="8deg"
-          z-index="0"
+          zIndex="0"
           delay={1.8}
           children={<CardTwo />}
         />{" "}
@@ -93,7 +93,7 @@ function Home() {
           width="150px"
           height="150px"
           rotate="-8deg"
-          z-index="0"
+          zIndex="0"
           delay={2}
         />
         <motion.img

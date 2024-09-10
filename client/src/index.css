@@ -17,3 +17,37 @@
 .innerCard {
   @apply rounded-[27px] bg-card-white p-5;
 }
+
+.menuLink {
+  @apply flex items-center w-full px-5 py-3 gap-2 rounded-md hover:bg-input-field transition duration-200;
+}
+
+.nav ul,
+.nav button,
+.landingPage {
+  display: none;
+}
+
+.nav .button {
+  display: block;
+}
+
+.menu {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .nav ul,
+  .landingPage {
+    display: flex;
+  }
+
+  .nav button {
+    display: block;
+  }
+
+  .nav .button,
+  .menu {
+    display: none;
+  }
+}

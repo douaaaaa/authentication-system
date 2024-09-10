@@ -9,8 +9,9 @@ export const useAuthStore = create((set) => ({
   error: null,
   isLoading: false,
   isCheckingAuth: true,
+  // showMenu: false,
+  // toggleMenu: (state) => set({ showMenu: !state.showMenu }),
   clearError: () => set({ error: null }),
-
   signup: async (name, email, password) => {
     set({ isLoading: true, error: null });
     try {

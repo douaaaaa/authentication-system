@@ -9,6 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import { useAuthStore } from "./store/auth.store.js";
 import ResetPassword from "./pages/ResetPassword";
 import FloatingItem from "./components/FloatingItem";
+import Menu from "./components/Menu";
+import { useMenuStore } from "./store/menu.auth";
+import { useState } from "react";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -28,11 +31,13 @@ const RedirectAuthenticateUser = ({ children }) => {
   return children;
 };
 function App() {
+  const { showMenu } = useMenuStore();
   return (
     <BrowserRouter>
       <div className=" relative h-screen pt-10 sm:pt-16 px-10 bg-blue-5 sm:px-28 text-txt-clr font-poppins overflow-hidden">
-        {/* <FloatingItem /> */}
+        <FloatingItem />
         <Navbar />
+        {showMenu && <Menu />}
         <Routes>
           <Route
             path="/"
