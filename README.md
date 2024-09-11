@@ -28,8 +28,8 @@ This project is a full-stack authentication system built using the MERN stack (M
 - MongoDB (local or cloud-based, e.g., MongoDB Atlas)
 ### Clone the Repository
 ```
-git clone https://github.com/douaaaaa/mern-authentication.git
-cd mern-authentication
+git clone https://github.com/douaaaaa/authentication-system
+cd authentication-system
 ```
 ### Backend Setup
 1. Navigate to the backend directory:
